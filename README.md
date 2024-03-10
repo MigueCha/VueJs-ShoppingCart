@@ -5,4 +5,4 @@
 Proyecto didáctico para el desarrollo de aplicaciones para Dipositivos móviles usando _VueJs-Compostion API_.
 
 # 👤 Autor
-[MIGUEL CHAVEZ](https://github.com/MigueCha)
+[Miguel Chavez](https://github.com/MigueCha)
