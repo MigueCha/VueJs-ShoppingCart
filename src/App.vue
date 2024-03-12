@@ -15,27 +15,38 @@ const items = ref([
 
 const newItem = ref('');
 const newItemHighPriority = ref(false)
+
+//Metodos, son funciones de javascript
+const saveItems = () => {
+  //Agrega un nuevo elemento a la lista proveniente de la caja de texto
+  items.value.push({ id: items.value.length, label: newItem.value})
+  //Borramos el contenido de la caja de texto
+  newItem.value = "";
+};
 </script>
 
 <template>
   <h1> <i :class="shoppingIcon">local_mall</i>{{ header }}</h1>
   <form 
-    v-on:submit.prevent="items.push({ id: items.length, label: newItem})"
+    v-on:submit.prevent="saveItems"
     class="add-item form">
     <input 
     v-model ="newItem" type="text" 
     placeholder="Agregar Articulo">
+
     <!-- Checkbox -->
     <label>
       <input type="checkbox" v-model="newItemHighPriority">
       Alta Prioridad
     </label>
+
     <!-- Boton -->
-    <button >
-      class="btn btn-primary"
+    <button 
+      class="btn btn-primary">
       Agregar Articulo
     </button>
   </form>
+  
   <ul>
     <li v-for="({ id, label }, i) in items" v-bind:key="id">🌟 {{ i }} {{ label }}</li>
   </ul>
