@@ -18,10 +18,8 @@
   const newItem = ref('');
   const newItemHighPriority = ref(false)
 
-  const selectButton = ref(false)
-
   //Metodos, son funciones de javascript
-const saveItems = () => {
+  const saveItems = () => {
   //Agrega un nuevo elemento a la lista proveniente de la caja de texto
   items.value.push({ id: items.value.length, label: newItem.value})
 
@@ -29,7 +27,11 @@ const saveItems = () => {
   newItem.value = "";
 };
 
-//Entrega Condicional Tema
+const doEdit = (edit) => {
+  editing.value = edit;
+  newItem.value = "";
+}
+const editing = ref(false);
 </script>
 
 <template>
@@ -38,13 +40,13 @@ const saveItems = () => {
     <h1> 
       <i :class="shoppingIcon">local_mall</i>{{ header }}
     </h1>
-    <button class="btn" @click="selectButton = false">Cancelar</button>
-    <button class="btn" @click="selectButton = true">Agregar Articulo</button>
+    <button v-on:click="doEdit(false)" v-if="editing" class="btn">Cancelar</button>
+    <button v-else v-on:click="doEdit(true)" class="btn btn-primary">Agregar Articulo</button>
   </div>
 
   <!-- Formulario -->
   <form
-    v-if="selectButton"
+    v-if="editing"
     v-on:submit.prevent="saveItems"
     class="add-item form">
     <input 
