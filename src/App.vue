@@ -15,6 +15,12 @@
   {id: 4 , label: 'Huevos', purchased: true, highPriority: true}
   ]);
 
+  //Creacion de un metodo para poder modificar cada uno de nuestros items
+  const togglePurchased = (item) => 
+  {
+    item.purchased = !item.purchased
+  }
+
   const newItem = ref('');
   const newItemHighPriority = ref(false)
 
@@ -69,12 +75,22 @@ const editing = ref(false);
   <!-- Entrega de Lista -->
   <ul>
     <li 
-    v-for="({ id, label, purchased, highPriority }, i) in items"
-    :class="{priority: highPriority, strikeout:purchased}" 
+    v-for="({ id, label, purchased, highPriority }, index) in items"
+    @click="togglePurchased(items[index])"
+    :class="{priority: highPriority, strikeout:purchased}"
     v-bind:key="id">
     🌟 {{ label }}
     </li>
   </ul>
+
+  <!-- <ul>
+    <li 
+    v-for="({ id, label, purchased, highPriority }, i) in items"
+    :class="[purchased ? 'strikeout' : '', highPriority ? 'priority' : '']" 
+    v-bind:key="id">
+    🌟 {{ label }}
+    </li>
+  </ul> -->
 
   <!-- Mensaje Condicional -->
   <p v-if="items.length === 0">🥀 No hay elementos en la lista 🥀</p>
