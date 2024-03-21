@@ -1,6 +1,6 @@
 <script setup>
   //Importando una funcion para crear referencias reactivas
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
 
   //Creando una referencia reactiva de tipo string
   const header = ref('App lista de compras');
@@ -22,6 +22,10 @@
   }
 
   const newItem = ref('');
+  //Creando Propiedad Computada
+  const characterCount = computed(() => {
+    return newItem.value.length;
+  });
   const newItemHighPriority = ref(false)
 
   //Creacion de Metodos, son funciones de javascript
@@ -76,6 +80,9 @@ const editing = ref(false);
       class="btn btn-primary">
       Agregar Articulo
     </button>
+    <p class="counter">
+      {{ characterCount }} / 200
+    </p>
   </form>
 
   <!-- Entrega de Lista -->
